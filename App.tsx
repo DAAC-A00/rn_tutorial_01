@@ -5,30 +5,16 @@ import React, { useState } from 'react'; // React와 useState 훅을 임포트�
 import { View, Text, Button, StyleSheet, Dimensions } from 'react-native'; // React Native의 컴포넌트를 임포트합니다.
 
 // 화면 크기를 가져옵니다.
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 const App: React.FC = () => { // App 컴포넌트를 정의합니다.
   const [count, setCount] = useState<number>(0); // 카운터의 초기값을 0으로 설정합니다.
 
-  // 초기화 버튼을 눌렀을 때 호출되는 함수입니다.
-  const reset = () => {
-    setCount(0); // 카운터의 초기값인 0으로 설정합니다.
-  };
-
-  // 더하기 버튼을 눌렀을 때 호출되는 함수입니다.
-  const increment = () => {
-    setCount(count + 1); // 현재 카운터 값에 1을 더합니다.
-  };
-
-  // 제곱하기 버튼을 눌렀을 때 호출되는 함수입니다.
-  const square = () => {
-    setCount(count * count); // 현재 카운터 값을 제곱합니다.
-  };
-
-  // 빼기 버튼을 눌렀을 때 호출되는 함수입니다.
-  const decrement = () => {
-    setCount(count - 1); // 현재 카운터 값에서 1을 뺍니다.
-  };
+  // 카운터 조작 함수들을 정의합니다.
+  const reset = () => setCount(0);
+  const increment = () => setCount(prevCount => prevCount + 1);
+  const square = () => setCount(prevCount => prevCount * prevCount);
+  const decrement = () => setCount(prevCount => prevCount - 1);
 
   return (
     <View style={styles.container}>
@@ -38,9 +24,7 @@ const App: React.FC = () => { // App 컴포넌트를 정의합니다.
         <Button title="제곱하기" onPress={square} />
         <Button title="빼기" onPress={decrement} />
       </View>
-      <View style={styles.resetButtonContainer}>
-        <Button title="초기화하기" onPress={reset} />
-      </View>
+      <Button title="초기화하기" onPress={reset} style={styles.resetButton} />
     </View>
   );
 };
@@ -63,7 +47,7 @@ const styles = StyleSheet.create({
     width: '100%', // 컨테이너 너비를 100%로 설정
     marginBottom: height * 0.03, // 아래쪽 여백을 화면 높이에 비례하여 조정
   },
-  resetButtonContainer: { // 초기화 버튼을 위한 스타일
+  resetButton: { // 초기화 버튼 스타일
     width: '100%', // 초기화 버튼 너비를 100%로 설정
   },
 });
