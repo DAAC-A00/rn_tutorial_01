@@ -8,13 +8,13 @@ const { height } = Dimensions.get('window');
 
 // CounterProps 인터페이스 정의 - 카운터 값
 interface CounterProps {
-  count: number; // 카운터의 현재 값
+  countNum: number; // 카운터의 현재 값
 }
 
 // Counter 컴포넌트 정의
-const Counter: React.FC<CounterProps> = ({ count }) => {
+const Counter: React.FC<CounterProps> = ({ countNum }) => {
   return (
-    <Text style={styles.counter}>카운터: {count}</Text>
+    <Text style={styles.counter}>카운터: {countNum}</Text>
   );
 };
 
